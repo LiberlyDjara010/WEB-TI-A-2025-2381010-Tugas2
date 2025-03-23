@@ -5,7 +5,7 @@ import { Mahasiswa } from './entities/mahasiswa.entity';
 
 @Injectable()
 export class MahasiswaService {
-  private mahasiswa: Mahasiswa[] = [];
+  private mahasiswas: Mahasiswa[] = [];
   private idCounter = 1;
 
   create(createMahasiswaDto: CreateMahasiswaDto): Mahasiswa {
@@ -13,16 +13,16 @@ export class MahasiswaService {
       id: this.idCounter++,
       ...createMahasiswaDto,
     };
-    this.mahasiswa.push(mahasiswa);
+    this.mahasiswas.push(mahasiswa);
     return mahasiswa;
   }
 
   findAll(): Mahasiswa[] {
-    return this.mahasiswa;
+    return this.mahasiswas;
   }
 
   findOne(id: number): Mahasiswa {
-    const mahasiswa = this.mahasiswa.find(m => m.id === id);
+    const mahasiswa = this.mahasiswas.find(m => m.id === id);
     if (!mahasiswa) {
       throw new NotFoundException(`Mahasiswa dengan ID ${id} tidak ditemukan`);
     }
@@ -30,26 +30,26 @@ export class MahasiswaService {
   }
 
   update(id: number, updateMahasiswaDto: UpdateMahasiswaDto): Mahasiswa {
-    const index = this.mahasiswa.findIndex(m => m.id === id);
+    const index = this.mahasiswas.findIndex(m => m.id === id);
     if (index === -1) {
       throw new NotFoundException(`Mahasiswa dengan ID ${id} tidak ditemukan`);
     }
     
-    this.mahasiswa[index] = {
-      ...this.mahasiswa[index],
+    this.mahasiswas[index] = {
+      ...this.mahasiswas[index],
       ...updateMahasiswaDto,
     };
     
-    return this.mahasiswa[index];
+    return this.mahasiswas[index];
   }
 
   remove(id: number): { message: string } {
-    const index = this.mahasiswa.findIndex(m => m.id === id);
+    const index = this.mahasiswas.findIndex(m => m.id === id);
     if (index === -1) {
       throw new NotFoundException(`Mahasiswa dengan ID ${id} tidak ditemukan`);
     }
     
-    this.mahasiswa.splice(index, 1);
+    this.mahasiswas.splice(index, 1);
     return { message: `Mahasiswa dengan ID ${id} berhasil dihapus` };
   }
 }

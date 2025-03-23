@@ -16,7 +16,7 @@ import {
   import { AuthGuard } from '../guards/auth.guard';
   import { IdValidationPipe } from '../pipes/id-validation.pipe';
   
-  @Controller('mahasiswa')
+  @Controller('')
   export class MahasiswaController {
     constructor(private readonly mahasiswaService: MahasiswaService) {}
   
